@@ -71,6 +71,9 @@
                     data: JSON.stringify($(this).serializeArray()),
                     success: function(response) {
                         alert('Данные успешно отправлены!');
+                        setTimeout(function(){
+                            window.location('/all_data');
+                        }, 3000);
                     },
                     error: function(error) {
                         alert('Ошибка при отправке данных. Пожалуйста, попробуйте еще раз.');

@@ -49,8 +49,14 @@ class TestFlaskApp(unittest.TestCase):
         alert = self.driver.switch_to.alert
         
         self.assertEqual(alert.text, 'Данные успешно отправлены!')
-        sleep(3)
-        alert.accept()  # Закрываем уведомление
+        #Ожидаем перенаправления
+        sleep(6)
+        # alert.accept()  # Закрываем уведомление
+
+    def test_redirect(self):
+        # Проверка загрузки страницы
+        self.assertIn("Данные из базы данных", self.driver.title)
+        sleep(5)
 
     @classmethod
     def tearDownClass(cls):
