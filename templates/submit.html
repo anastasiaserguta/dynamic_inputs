@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Данные из базы данных</title>
-</head>
-<body>
+{% extends 'base_template.html' %}
+
+{% block title %}Данные из базы данных{% endblock %}
+{% block content %}
     <table border="1">
+        <caption>Данные из базы данных</caption>
         <thead>
             <tr>
                 <th>Первичный ключ</th>
@@ -22,5 +19,4 @@
             {% endfor %}
         </tbody>
     </table>
-</body>
-</html>
+{% endblock %}

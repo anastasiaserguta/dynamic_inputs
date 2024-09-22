@@ -23,7 +23,7 @@ class TestFlaskApp(unittest.TestCase):
             add_input_button.click()
             sleep(1)
 
-        # 2 секунды приостановки потока на обовление страницы
+        # 2 секунды приостановки потока на обновление страницы
         sleep(2)
 
         # Подсчет количества полей
@@ -37,7 +37,7 @@ class TestFlaskApp(unittest.TestCase):
         inputs = self.driver.find_elements(By.CSS_SELECTOR, "#inputs-container input")
         for i in range(len(inputs)):
             inputs[i].send_keys(f"data{i + 1}")
-            sleep(1)
+            # sleep(1)
 
         sleep(2)
 
@@ -47,15 +47,21 @@ class TestFlaskApp(unittest.TestCase):
 
         # Ожидаем уведомление об успешной отправке данных
         alert = self.driver.switch_to.alert
-        
+        sleep(3)
+
         self.assertEqual(alert.text, 'Данные успешно отправлены!')
-        #Ожидаем перенаправления
-        sleep(6)
-        # alert.accept()  # Закрываем уведомление
+        alert.accept()  # Закрываем уведомление
 
     def test_redirect(self):
+        #Ожидаем перенаправления
+        sleep(5)
         # Проверка загрузки страницы
-        self.assertIn("Данные из базы данных", self.driver.title)
+        current_url = self.driver.current_url
+        print(current_url)
+        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        sleep(2)
+        self.driver.execute_script("window.scrollTo(0, 0);")
+        self.assertEqual(current_url, 'http://127.0.0.1:5000/all_data')
         sleep(5)
 
     @classmethod

@@ -15,7 +15,7 @@ def get_db_connect():
 
 @app.route('/')
 def start_app():
-    return render_template('index.html')
+    return render_template('inputs.html')
 
 
 
@@ -36,11 +36,11 @@ def submit_data():
         cursor.close()
         conn.close()
         
-        return jsonify({'status': 'success', 'message': 'Данные успешно добавлены!'}), 200
+        return jsonify({'status': 'success', 'redirect_url': '/all_data'}), 200
 
     except Exception as e:
         print(f'Произошла ошибка при добавлении данных: {e}')
-        return jsonify({'status': 'error', 'message': 'Произошла ошибка при добавлении данных!'}), 500
+        return jsonify({'status': 'error'}), 500
 
 
 def get_data_from_db():
@@ -57,12 +57,11 @@ def get_data_from_db():
         print(f"Произошла ошибка при получении данных из базы: {e}")
         return []
 
-@app.route('/all_data', methods=['GET'])
+@app.route('/all_data')
 def all_data_from_db():
     all_inputs = get_data_from_db()
     return render_template('submit.html', data=all_inputs)
 
 
-if __name__=='__main__':
-    app.run()
+
 

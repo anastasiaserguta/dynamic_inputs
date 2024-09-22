@@ -1,0 +1,40 @@
+{% extends 'base_template.html' %}
+
+{% block title %}Главная страница ввода{% endblock %}
+{% block content %}
+<fieldset>
+    <legend>Поля формы:</legend>
+        <form id="dynamic-form">
+            <button type="button" id="add-input">Добавить поле</button>
+            <button type="submit">Отправить все данные</button>
+            <div id="inputs-container">
+                <input type="text" name="input-name[]" placeholder="Введите данные" required>
+            </div>
+        </form>
+</fieldset>
+<script>
+    $(document).ready(function() {
+        $('#add-input').click(function() {
+            $('#inputs-container').append('<input type="text" name="input-name[]" placeholder="Введите данные" required>');
+        });
+
+        $('#dynamic-form').submit(function(event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: '/submit',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify($(this).serializeArray()),
+                success: function(response) {
+                    alert('Данные успешно отправлены!');
+                    window.location.href = '/all_data';
+                },
+                error: function(error) {
+                    alert('Ошибка при отправке данных. Пожалуйста, попробуйте еще раз.');
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
