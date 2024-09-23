@@ -57,7 +57,6 @@ class TestFlaskApp(unittest.TestCase):
         sleep(5)
         # Проверка загрузки страницы
         current_url = self.driver.current_url
-        print(current_url)
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         sleep(2)
         self.driver.execute_script("window.scrollTo(0, 0);")

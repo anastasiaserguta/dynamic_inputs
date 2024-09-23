@@ -5,6 +5,7 @@ import json
 
 
 app = Flask(__name__)
+app.config['DEBAG'] = True
 
 def get_db_connect():
     conn = connect(host='localhost',

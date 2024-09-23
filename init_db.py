@@ -4,7 +4,8 @@ import psycopg2
 conn = psycopg2.connect(host='localhost',
                         database=environ['POSTGRES_DB'],
                         user=environ['USERNAME_DB'],
-                        password=environ['PASSWORD_DB'])
+                        password=environ['PASSWORD_DB'],
+                        )
 
 cur = conn.cursor()
 
