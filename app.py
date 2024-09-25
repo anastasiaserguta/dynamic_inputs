@@ -55,7 +55,7 @@ def get_data_from_db():
         conn.close()
         return data
     except Exception as e:
-        print(f"Произошла ошибка при получении данных из базы: {e}")
+        print(f'Произошла ошибка при получении данных из базы: {e}')
         return []
 
 @app.route('/all_data')

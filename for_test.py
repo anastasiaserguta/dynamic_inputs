@@ -15,7 +15,7 @@ class TestFlaskApp(unittest.TestCase):
 
     def test_add_input_fields(self):
         # Проверка загрузки страницы
-        self.assertIn("Главная страница", self.driver.title)
+        self.assertIn('Главная страница', self.driver.title)
 
         # Добавление 5 полей
         add_input_button = self.driver.find_element(By.ID, 'add-input')
@@ -23,7 +23,6 @@ class TestFlaskApp(unittest.TestCase):
             add_input_button.click()
             sleep(1)
 
-        # 2 секунды приостановки потока на обновление страницы
         sleep(2)
 
         # Подсчет количества полей
@@ -34,9 +33,9 @@ class TestFlaskApp(unittest.TestCase):
         self.assertEqual(len(inputs), 6)  
 
         # Получаем все инпуты на странице и добавляем в них данные
-        inputs = self.driver.find_elements(By.CSS_SELECTOR, "#inputs-container input")
+        inputs = self.driver.find_elements(By.CSS_SELECTOR, '#inputs-container input')
         for i in range(len(inputs)):
-            inputs[i].send_keys(f"data{i + 1}")
+            inputs[i].send_keys(f'data{i + 1}')
             # sleep(1)
 
         sleep(2)
@@ -57,9 +56,9 @@ class TestFlaskApp(unittest.TestCase):
         sleep(5)
         # Проверка загрузки страницы
         current_url = self.driver.current_url
-        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        self.driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
         sleep(2)
-        self.driver.execute_script("window.scrollTo(0, 0);")
+        self.driver.execute_script('window.scrollTo(0, 0);')
         self.assertEqual(current_url, 'http://127.0.0.1:5000/all_data')
         sleep(5)
 
